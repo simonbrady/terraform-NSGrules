@@ -1,26 +1,23 @@
-
 variable "resource_group_name" {
-  description = "resource group name for vnet"
+  description = "resource group name for NSG"
 }
 
-
+# Priority attribute is given as the map key
 variable "network_security_rules" {
-  type        = map(object({
+  type = map(object({
     name                         = string,
-    description                  = string,
-    priority                     = number,
+    description                  = optional(string),
     direction                    = string,
     access                       = string,
     protocol                     = string,
-    source_port_range            = string,
-    source_port_ranges           = list(any),
-    destination_port_range       = string,
-    destination_port_ranges      = list(any),
-    source_address_prefix        = string,
-    source_address_prefixes      = list(any),
-    destination_address_prefix   = string,
-    destination_address_prefixes = list(any),
+    source_port_range            = optional(string),
+    source_port_ranges           = optional(list(string)),
+    destination_port_range       = optional(string),
+    destination_port_ranges      = optional(list(string)),
+    source_address_prefix        = optional(string),
+    source_address_prefixes      = optional(list(string)),
+    destination_address_prefix   = optional(string),
+    destination_address_prefixes = optional(list(string)),
   }))
   description = "network security rules"
-
 }
